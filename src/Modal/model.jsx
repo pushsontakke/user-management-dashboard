@@ -1,11 +1,28 @@
 import "./model.css";
 
-const Model = ({ formData, setFormData, setShowModal, handleAddUser }) => {
-  const handleNewUser = () => {
-    handleAddUser(formData);
+const Model = ({
+  formData,
+  setFormData,
+  setShowModal,
+  handleAddUser,
+  editTrue,
+  handleEditUser,
+}) => {
+  const handleUser = () => {
+    if (editTrue) {
+      handleEditUser(formData);
+    } else {
+      handleAddUser(formData);
+    }
     setShowModal(false);
     setFormData({ name: "", email: "", department: "" });
   };
+
+  const handleClearForm = () => {
+    setShowModal(false);
+    setFormData({ name: "", email: "", department: "" });
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal">
@@ -26,13 +43,15 @@ const Model = ({ formData, setFormData, setShowModal, handleAddUser }) => {
           type="email"
           placeholder="Department"
           value={formData.department}
-          onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, department: e.target.value })
+          }
         />
         <div className="modal-actions">
-          <button onClick={() => setShowModal(false)} className="btn">
+          <button onClick={handleClearForm} className="btn">
             Cancel
           </button>
-          <button onClick={handleNewUser} className="btn primary">
+          <button onClick={handleUser} className="btn primary">
             Save
           </button>
         </div>

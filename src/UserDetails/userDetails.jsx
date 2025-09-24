@@ -7,11 +7,24 @@ const UserDetailsTable = ({
   formData,
   setFormData,
   handleAddUser,
-
+  setEditUser,
+  handleEditUser,
+  editTrue,
+  setEditTrue,
 }) => {
   const [showModel, setShowModal] = useState(false);
 
- 
+  const handleEditUserDetails = (user) => {
+    setFormData({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      department: user.company.name,
+    });
+    setShowModal(true);
+    setEditTrue(true);
+  };
+  
 
   return (
     <div className="user-table-container">
@@ -40,7 +53,9 @@ const UserDetailsTable = ({
                 <td>{user.email}</td>
                 <td>{user.company.name}</td>
                 <td>
-                  <button >Edit</button>
+                  <button onClick={() => handleEditUserDetails(user)}>
+                    Edit
+                  </button>
                   <button>Delete</button>
                 </td>
               </tr>
@@ -55,6 +70,9 @@ const UserDetailsTable = ({
           setFormData={setFormData}
           setShowModal={setShowModal}
           handleAddUser={handleAddUser}
+          editTrue={editTrue}
+          setEditUser={setEditUser}
+          handleEditUser={handleEditUser}
         />
       )}
     </div>

@@ -1,31 +1,37 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import UserDetailsTable from "../UserDetails/userDetails";
 import axios from "axios";
 import "./dashboard.css";
 
 const Dashboard = () => {
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [editTrue, setEditTrue] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     department: "",
   });
 
+  const [editUser, setEditUser] = useState({
+    id: null,
+    name: "",
+    email: "",
+    department: "",
+  });
 
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-          try {
-            const response = await axios.get(
-              "https://jsonplaceholder.typicode.com/users"
-            );
-            setUsers(response.data);
-          } catch (error) {
-            console.error("Error fetching users:", error);
-            return error.message;
-          }
-        };
-        fetchUsers();
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        return error.message;
+      }
+    };
+    fetchUsers();
   }, []);
 
   const handleAddUser = async (formData) => {
@@ -34,7 +40,6 @@ const Dashboard = () => {
         "https://jsonplaceholder.typicode.com/users",
         formData
       );
-      console.log(" response: User added:", response);
       // setUsers([...users, response.data]);
       if (response.status === 201) {
         alert("User added successfully");
@@ -45,6 +50,20 @@ const Dashboard = () => {
     }
   };
 
+  const handleEditUser = async (updatedUser) => {
+    try {
+      const response = await axios.put(
+        `https://jsonplaceholder.typicode.com/users/${updatedUser.id}`,
+        updatedUser
+      );
+      if(response.status === 200){
+        alert(" response: user edited");
+      }
+    } catch (error) {
+      console.error("Error editing user:", error.message);
+      alert("Failed to edit user", error.message);
+    }
+  };
 
   return (
     <div>
@@ -54,7 +73,11 @@ const Dashboard = () => {
         formData={formData}
         setFormData={setFormData}
         handleAddUser={handleAddUser}
-        
+        editUser={editUser}
+        setEditUser={setEditUser}
+        handleEditUser={handleEditUser}
+        editTrue={editTrue}
+        setEditTrue={setEditTrue}
       />
     </div>
   );
