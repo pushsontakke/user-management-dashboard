@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./UserDetailsTable.css";
+import "./userDetailsTable.css";
 import Model from "../Modal/model";
 import Filter from "../Filter/filter";
 
