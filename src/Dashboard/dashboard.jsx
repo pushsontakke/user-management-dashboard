@@ -40,9 +40,9 @@ const Dashboard = () => {
         "https://jsonplaceholder.typicode.com/users",
         formData
       );
-      // setUsers([...users, response.data]);
       if (response.status === 201) {
         alert("User added successfully");
+        // setUsers([...users, response.data]);
       }
     } catch (error) {
       console.error("Error adding user:", error.message);
@@ -56,12 +56,26 @@ const Dashboard = () => {
         `https://jsonplaceholder.typicode.com/users/${updatedUser.id}`,
         updatedUser
       );
-      if(response.status === 200){
+      if (response.status === 200) {
         alert(" response: user edited");
       }
     } catch (error) {
       console.error("Error editing user:", error.message);
       alert("Failed to edit user", error.message);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await axios.delete(
+        `https://jsonplaceholder.typicode.com/users/${userId}`
+      );
+      if (response.status === 200) {
+        alert("User deleted successfully");
+        setUsers(users.filter((user) => user.id !== userId));
+      }
+    } catch (error) {
+      console.error("Error deleting user: ", error);
     }
   };
 
@@ -78,6 +92,7 @@ const Dashboard = () => {
         handleEditUser={handleEditUser}
         editTrue={editTrue}
         setEditTrue={setEditTrue}
+        handleDeleteUser={handleDeleteUser}
       />
     </div>
   );

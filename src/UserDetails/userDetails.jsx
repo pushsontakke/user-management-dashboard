@@ -11,6 +11,7 @@ const UserDetailsTable = ({
   handleEditUser,
   editTrue,
   setEditTrue,
+  handleDeleteUser,
 }) => {
   const [showModel, setShowModal] = useState(false);
 
@@ -24,7 +25,6 @@ const UserDetailsTable = ({
     setShowModal(true);
     setEditTrue(true);
   };
-  
 
   return (
     <div className="user-table-container">
@@ -56,7 +56,7 @@ const UserDetailsTable = ({
                   <button onClick={() => handleEditUserDetails(user)}>
                     Edit
                   </button>
-                  <button>Delete</button>
+                  <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
                 </td>
               </tr>
             ))}
