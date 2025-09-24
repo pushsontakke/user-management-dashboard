@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import UserDetailsTable from "../UserDetails/userDetails";
 import axios from "axios";
 import "./dashboard.css";
+import Pagination from "../Pagination/pagination";
+import Filter from "../Filter/filter";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -73,7 +75,13 @@ const Dashboard = () => {
       if (response.status === 200) {
         alert("User deleted successfully");
         setUsers(users.filter((user) => user.id !== userId));
+        // setFilteredUsers(filteredUsers.filter((user) => user.id !== userId));
       }
+
+      //   const newTotalPages = Math.ceil(newUsers.length / itemsPerPage);
+      //   if (currentPage > newTotalPages && newTotalPages > 0) {
+      //     setCurrentPage(newTotalPages);
+      //   }
     } catch (error) {
       console.error("Error deleting user: ", error);
     }
@@ -82,6 +90,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>User Management Dashboard</h1>
+
       <UserDetailsTable
         users={users}
         formData={formData}
@@ -94,6 +103,7 @@ const Dashboard = () => {
         setEditTrue={setEditTrue}
         handleDeleteUser={handleDeleteUser}
       />
+      <Pagination users={users} />
     </div>
   );
 };
