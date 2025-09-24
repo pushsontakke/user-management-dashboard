@@ -1,11 +1,5 @@
 .user-table-container {
-    font-family: Arial, sans-serif;
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px 15rem;
 }
 
 .table-header {
@@ -15,61 +9,185 @@
     margin-bottom: 20px;
 }
 
-.user-table-container h2 {
+.table-header h2 {
+    margin: 0;
     color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
 }
 
+.table-header button {
+    background: #1988ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.table-header button:hover {
+    background: #c4e0ff;
+}
+
+/* Controls Container */
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.controls-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn,
+.reset-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.filter-btn {
+    background: #28a745;
+    color: white;
+}
+
+.filter-btn:hover {
+    background: #218838;
+}
+
+.reset-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.reset-btn:hover {
+    background: #545b62;
+}
+
+/* Table Styles */
 .user-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.user-table th,
+.user-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 .user-table th {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
 }
 
-.user-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    color: #555;
+.sortable {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.sortable:hover {
+    background-color: #e9ecef;
 }
 
 .user-table tbody tr:hover {
     background-color: #f5f5f5;
-    transition: background-color 0.2s ease;
 }
 
-.user-table tbody tr:last-child td {
-    border-bottom: none;
+/* Action Buttons */
+.edit-btn {
+    background: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
-/* Responsive design */
+.edit-btn:hover {
+    background: #e0a800;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+/* No Data and Results Info */
+.no-data {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.results-info {
+    text-align: right;
+    color: #6c757d;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .user-table-container {
-        margin: 10px;
-        padding: 15px;
+    .controls-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-container {
+        min-width: auto;
+    }
+
+    .controls-buttons {
+        justify-content: center;
     }
 
     .user-table {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .user-table th,
     .user-table td {
-        padding: 8px 10px;
+        padding: 8px 6px;
     }
 }
